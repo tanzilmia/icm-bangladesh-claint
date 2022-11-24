@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { myContext } from '../../contextApi/Authcontext';
 
 const Login = () => {
     const { register, handleSubmit,formState: { errors },} = useForm();
     const [loginError, setLoginError] = useState(''); 
     const {logIn,googleSignin} = useContext(myContext) 
+    const negivet = useNavigate()
     
     const handlLogin = data => {
         console.log(data);
@@ -32,6 +33,7 @@ const Login = () => {
           const email = user.email;
           const role = "bayer";
             storeGoogleUserInfo(name,email,role)
+
         })
         .catch(error =>{
             setLoginError(error.message)
@@ -51,6 +53,7 @@ const Login = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data);
+            negivet('/')
         })
     }
 
