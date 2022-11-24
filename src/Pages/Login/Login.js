@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { myContext } from '../../contextApi/Authcontext';
 
 const Login = () => {
@@ -8,6 +8,8 @@ const Login = () => {
     const [loginError, setLoginError] = useState(''); 
     const {logIn,googleSignin} = useContext(myContext) 
     const negivet = useNavigate()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     
     const handlLogin = data => {
         console.log(data);
@@ -15,12 +17,9 @@ const Login = () => {
         logIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                // setloginuserEmail(user.email)
-               
+                negivet(from, { replace: true });
             })
             .catch(error => {
-                console.log(error.message)
                 setLoginError(error.message);
             });
     }
@@ -53,7 +52,7 @@ const Login = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            negivet('/')
+            negivet(from, { replace: true });
         })
     }
 
