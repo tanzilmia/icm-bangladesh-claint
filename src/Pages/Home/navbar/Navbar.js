@@ -8,7 +8,7 @@ const Navbar = () => {
     const menulist = <React.Fragment>
     <li><Link to="/">Home</Link></li>
     <li><Link to="/blog">Blog</Link></li>
-    <li><Link to="/signup">signup</Link></li>
+    <li><Link to="/login">login</Link></li>
 </React.Fragment>
 
     return (

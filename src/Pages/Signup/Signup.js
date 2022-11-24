@@ -82,7 +82,7 @@ const Signup = () => {
                     {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                 </div>
                 <div className="form-control w-full max-w-xs">
-                    <label className="label"> <span className="label-text">Type Of Account</span></label>
+                    <label className="label"> <span className="label-text">Select Type Of Account</span></label>
                     <select name="role" {...register("role", { required: true})} className="select select-bordered w-full">
                      <option value= 'bayer'> bayer </option>
                      <option value= 'seller'> seller </option>
