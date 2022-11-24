@@ -1,11 +1,18 @@
-import React from 'react';
+import moment from 'moment/moment';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import {  useNavigate } from 'react-router-dom';
+import { myContext } from '../../../contextApi/Authcontext';
 
 const AddProduct = () => {
     const { register, handleSubmit,formState: { errors },} = useForm();
+    const {user} =  useContext(myContext)
     const naviget = useNavigate()
+    const time = moment().format('lll');
+   
+   
+
     const imgkey = process.env.REACT_APP_IMAGE_SEC
     console.log(imgkey);
     const handleAddproducts = data => {
@@ -31,6 +38,9 @@ const AddProduct = () => {
                     condition_type: data.condition,
                     brand_name: data.brand_name, 
                     productDetails: data.productDetails, 
+                    location :data.location,
+                    time:time,
+                    userEmail : user.email
                 }
 
                 // save doctor information to the database
@@ -68,15 +78,23 @@ const AddProduct = () => {
 
             <div className="form-control w-full">
                 <label className="label"> <span className="label-text">Product price</span></label>
-                <input type="number" {...register("price", {
+                <input type="text" {...register("price", {
                     required: "price is Required"
                 })} className="input input-bordered w-full" />
                 {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
             </div>
 
             <div className="form-control w-full">
+                <label className="label"> <span className="label-text">Product location</span></label>
+                <input type="text" {...register("location", {
+                    required: "location is Required"
+                })} className="input input-bordered w-full" />
+                {errors.location && <p className='text-red-500'>{errors.location.message}</p>}
+            </div>
+
+            <div className="form-control w-full">
                 <label className="label"> <span className="label-text">Product Market Price</span></label>
-                <input type="number" {...register("marketprice", {
+                <input type="text" {...register("marketprice", {
                     required: "Market Price is Required"
                 })} className="input input-bordered w-full" />
                 {errors.marketprice && <p className='text-red-500'>{errors.marketprice.message}</p>}
@@ -130,7 +148,7 @@ const AddProduct = () => {
 
             <div className="form-control w-full">
                 <label className="label"> <span className="label-text">Product Details</span></label>
-                <textarea style={{height:'70px'}}  {...register("productDetails", { required: "productDetails Required"})}  placeholder='product details ...' rows="10" className='input input-bordered w-full'></textarea>
+                <textarea style={{height:'150px'}}  {...register("productDetails", { required: "productDetails Required"})}  placeholder='product details ...' rows="10" className='input input-bordered w-full'></textarea>
                 {errors.productDetails && <p className='text-red-500'>{errors.productDetails.message}</p>}
             </div>
 

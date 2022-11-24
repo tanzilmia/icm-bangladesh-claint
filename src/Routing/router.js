@@ -4,7 +4,6 @@ import Main from "../Layout/Main";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import Blgs from "../Pages/Blogs/Blgs";
 import AddProduct from "../Pages/DashBoardPage/Add A Product/AddProduct";
-import Dashboard from "../Pages/DashBoardPage/Dashboard";
 import Myorders from "../Pages/DashBoardPage/My orders/Myorders";
 import MyProducts from "../Pages/DashBoardPage/My Products/MyProducts";
 import Homepage from "../Pages/Home/HomePage/Homepage";
@@ -34,8 +33,11 @@ const router = createBrowserRouter([
             },
             {
                 path : '/categori/:id',
-                element : <AllProducts></AllProducts>
+                element : <AllProducts></AllProducts>,
+                loader : ({params})=> fetch(`http://localhost:5000/categories/${params.id}`)
+
             },
+            
         ]
     },
     {
@@ -54,6 +56,7 @@ const router = createBrowserRouter([
                 path : '/dashbord/addproducts',
                 element : <AddProduct></AddProduct>
             },
+           
         ]
     }
 ])

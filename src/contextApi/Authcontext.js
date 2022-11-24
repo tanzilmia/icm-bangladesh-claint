@@ -14,6 +14,7 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 export const myContext = createContext();
 const Authcontext = ({ children }) => {
+  const [products, setproducts] = useState(false)
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const signuP = (email, password) => {
@@ -56,7 +57,10 @@ const Authcontext = ({ children }) => {
     logOut,
     user,
     loading,
-    googleSignin
+    googleSignin,
+    setproducts,
+    products
+
   };
 
   return (

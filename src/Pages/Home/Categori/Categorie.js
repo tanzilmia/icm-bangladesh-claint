@@ -12,7 +12,9 @@ const Categorie = () => {
         }
     })
 
-
+if(isLoading){
+    return <p>loadding...</p>
+}
 
     return (
         <div className='md:max-w-[940px] md:mx-auto grid gap-4 md:grid-cols-3 lg:grid-cols-3'>

@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 const Card = ({categories}) => {
+  
     const {thumbnal,brand_name,_id} = categories;
 
   return (
