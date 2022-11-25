@@ -27,7 +27,7 @@ const AddProduct = () => {
         .then(res => res.json())
         .then(upload => {
             if(upload.success){
-               
+            //    stored data on object for send db
                 const myproducts = {
                     product_name : data.productName, 
                     image : upload.data.url,
@@ -43,7 +43,7 @@ const AddProduct = () => {
                     userEmail : user.email
                 }
 
-                // save doctor information to the database
+                // save product information to the db
                 fetch('http://localhost:5000/allproducts', {
                     method: 'POST',
                     headers: {

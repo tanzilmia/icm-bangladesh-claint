@@ -2,8 +2,8 @@ import React from "react";
 import './productCard.css'
 import { FiPhoneCall } from 'react-icons/fi';
 import { ImLocation2 } from 'react-icons/im';
-const ProductCard = ({ prod }) => {
-  console.log(prod);
+import { GoVerified } from 'react-icons/go';
+const ProductCard = ({ prod ,setmodalinfo}) => {
   const {
     product_name,
     image,
@@ -36,17 +36,18 @@ const ProductCard = ({ prod }) => {
       <div className="right_side p-5 lg:w-[-60%] md:w-[60%]">
         <h2 className="text-4xl mb-3 text-lime-800 font-bold"> {product_name} </h2>
         <div className="flex items-center justify-between mb-3">
-        <h4 className="text-2xl font-semi-bold"> Post by - {userEmail} </h4>
+        <div className="flex items-center"> <span className="text-2xl font-semi-bold mr-2">Post by - {userEmail}</span> <span className="text-xl text-blue-500"><GoVerified/></span> </div>
         <small className="text-orange-300">{time} </small>
         </div>
         <p className="description"> {productDetails.slice(0,300)} </p>
-        <div className=" flex rounded-md"> 
+        <div className=" flex my-2 rounded-md"> 
           <span className="flex mx-1 p-1 bg-[#edeeed] rounded-md items-center"> <div className="mr-2"><FiPhoneCall/></div> {mobile} </span>
-          <span className="flex mx-1 p-1 bg-[#edeeed] rounded-md items-center"> Market price {Market_Price}, </span>
-          <span className="flex mx-1 p-1 bg-[#edeeed] rounded-md items-center"> purchase year {purchase_year}, </span>
-          <span className="flex mx-1 p-1 bg-[#edeeed] rounded-md items-center">  condition {condition_type}, </span>
-          <span className="flex mx-1 p-1 bg-[#edeeed] rounded-md items-center"> <ImLocation2/> {location} </span>
+          <span className="flex mx-1 p-1 bg-[#f0b533] rounded-md items-center"> Market price {Market_Price}, </span>
+          <span className="flex mx-1 p-1 bg-[#ec60c4] rounded-md items-center"> purchase year {purchase_year}, </span>
+          <span className="flex mx-1 p-1 bg-[#86c786] rounded-md items-center">  condition {condition_type}, </span>
+          <span className="flex mx-1 p-1 bg-[#ed7f20] rounded-md items-center"> <ImLocation2/> {location} </span>
         </div>
+        <div> <label onClick={()=>setmodalinfo(prod)} htmlFor="openmodal" className="btn btn-success">Book Now</label> </div>
       </div>
     </div>
   );

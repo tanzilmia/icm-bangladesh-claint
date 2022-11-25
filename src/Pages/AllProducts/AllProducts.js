@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookModal from '../../component/BookModal';
 import ProductCard from './ProductCard'
 const AllProducts = () => {
-  
+    const [modalinfo, setmodalinfo] = useState(null)
     const data = useLoaderData()
     const  {category_name} = data
 
@@ -15,9 +16,6 @@ const AllProducts = () => {
             return data 
         }
      })
-
-     console.log(product);
- 
      if(isLoading){
         return <p>lodding...</p>
      }
@@ -26,8 +24,9 @@ const AllProducts = () => {
         <div>
             <p>this is all product page {category_name}</p>
             {
-                product.map(prod => <ProductCard key = {prod._id} prod = {prod}></ProductCard>)
+                product.map(prod => <ProductCard setmodalinfo={setmodalinfo} key = {prod._id} prod = {prod}></ProductCard>)
             }
+            { modalinfo&& <BookModal setmodalinfo={setmodalinfo} modalinfo={modalinfo}></BookModal>}
             
         </div>
     );
