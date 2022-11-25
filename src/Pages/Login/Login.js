@@ -2,22 +2,29 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { myContext } from '../../contextApi/Authcontext';
+import useTokenHook from '../../CustomeHOOk/useTokenHook/useTokenHook';
 
 const Login = () => {
     const { register, handleSubmit,formState: { errors },} = useForm();
     const [loginError, setLoginError] = useState(''); 
     const {logIn,googleSignin} = useContext(myContext) 
+    const [useremail, setuseremail] = useState('');
+    const [token] = useTokenHook(useremail)
     const negivet = useNavigate()
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+
+    if(token){
+        negivet(from, { replace: true });
+    }
     
     const handlLogin = data => {
         console.log(data);
         setLoginError('');
         logIn(data.email, data.password)
             .then(result => {
-                const user = result.user;
-                negivet(from, { replace: true });
+                
+                setuseremail(data.email)
             })
             .catch(error => {
                 setLoginError(error.message);
@@ -32,7 +39,7 @@ const Login = () => {
           const email = user.email;
           const role = "bayer";
             storeGoogleUserInfo(name,email,role)
-
+            setuseremail(email)
         })
         .catch(error =>{
             setLoginError(error.message)

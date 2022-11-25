@@ -1,24 +1,33 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
+import { myContext } from '../../../contextApi/Authcontext';
 
 
 const Allseller = () => {
-
+   const {user} = useContext(myContext)
     const {data : sellers = [], isLoading} = useQuery({
-        queryKey : [''],
+        queryKey : ['seller',user?.email],
         queryFn : async ()=>{
-            const res = await fetch(`http://localhost:5000/seller`)
+            const res = await fetch(`http://localhost:5000/seller?email=${user?.email}`,{
+              headers: {
+                authorization: `bearer ${localStorage.getItem('icmToken')}`
+            }
+            });
             const data = await res.json()
             return data
         }
     })
+
+    if(isLoading){
+      return <p>Loadding ...</p>
+    }
 
     return (
         <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
             <tr>
-              <th></th>
+              <th>serial</th>
               <th>Name</th>
               <th>Email</th>
               <th>Status</th>

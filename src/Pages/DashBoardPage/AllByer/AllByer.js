@@ -1,21 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
+
+import {myContext} from '../../../contextApi/Authcontext'
 
 const AllByer = () => {
+  const {user} = useContext(myContext)
   const { data: bayers = [], isLoading } = useQuery({
-    queryKey: [""],
+    queryKey: ["bayer",user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/bayer`);
+      const res = await fetch(`http://localhost:5000/bayer?email=${user?.email}`,{
+        headers: {
+          authorization: `bearer ${localStorage.getItem('icmToken')}`
+      }
+      });
       const data = await res.json();
       return data;
     },
   });
+
+  if(isLoading){
+    return <p>Loadding..</p>
+  }
   return (
     <div className="overflow-x-auto">
       <table className="table w-full">
         <thead>
           <tr>
-            <th></th>
+            <th>serial</th>
             <th>Name</th>
             <th>Email</th>
             <th>Action</th>
@@ -27,7 +38,7 @@ const AllByer = () => {
               <th>{index + 1}</th>
               <th> {bayer.name} </th>
               <th>{bayer.email}</th>
-              <th><button>Delete</button></th>
+              <th><button className="btn btn-sm btn-warning">Delete</button></th>
             </tr>
           ))}
         </tbody>

@@ -1,17 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BookModal from '../../component/BookModal';
+import { myContext } from '../../contextApi/Authcontext';
 import ProductCard from './ProductCard'
 const AllProducts = () => {
+    const {user} = useContext(myContext)
     const [modalinfo, setmodalinfo] = useState(null)
     const data = useLoaderData()
     const  {category_name} = data
 
      const {data:product = [], isLoading} = useQuery({
-        queryKey : ['allproducts',],
+        queryKey : ['allproducts',category_name],
         queryFn : async ()=>{
-            const res = await fetch(`http://localhost:5000/allproducts?category_name=${category_name}`)
+            const res = await fetch(`http://localhost:5000/allproducts?category_name=${category_name}&email=${user?.email}`,{
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('icmToken')}`
+                }
+            })
             const data = await res.json()
             return data 
         }

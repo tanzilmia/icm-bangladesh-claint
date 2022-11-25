@@ -8,7 +8,11 @@ const MyProducts = () => {
     queryKey: ["myproduct", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/myproduct?email=${user?.email}`
+        `http://localhost:5000/myproduct?email=${user?.email}`,{
+          headers: {
+            authorization: `bearer ${localStorage.getItem('icmToken')}`
+        }
+        }
       );
       const data = await res.json();
       return data;
