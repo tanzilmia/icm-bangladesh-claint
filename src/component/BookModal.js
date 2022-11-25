@@ -26,9 +26,7 @@ const BookModal = ({ modalinfo,setmodalinfo }) => {
         phone,
         brand_name
     }
-
     toast.success(`${product_name} is booked`)
-
   }
 
   return (
