@@ -9,7 +9,6 @@ const AllProducts = () => {
     const [modalinfo, setmodalinfo] = useState(null)
     const data = useLoaderData()
     const  {category_name} = data
-
      const {data:product = [], isLoading} = useQuery({
         queryKey : ['allproducts',category_name],
         queryFn : async ()=>{
@@ -25,6 +24,8 @@ const AllProducts = () => {
      if(isLoading){
         return <p>lodding...</p>
      }
+
+     
 
     return (
         <div>

@@ -3,6 +3,7 @@ import './productCard.css'
 import { FiPhoneCall } from 'react-icons/fi';
 import { ImLocation2 } from 'react-icons/im';
 import { GoVerified } from 'react-icons/go';
+import { useQuery } from "@tanstack/react-query";
 const ProductCard = ({ prod ,setmodalinfo}) => {
   const {
     product_name,
@@ -18,6 +19,21 @@ const ProductCard = ({ prod ,setmodalinfo}) => {
     time,
     sellerName
   } = prod;
+
+  const {data : user, isLoading} = useQuery({
+    queryKey : ['user',sellerName],
+    queryFn : async ()=>{
+      const res = await fetch(`http://localhost:5000/user?sellerName=${sellerName}`)
+      const data = await res.json()
+      return data
+    }
+  })
+
+  if(isLoading){
+    return <p>loadding...</p>
+  }
+
+  console.log(user)
 
 
 
@@ -36,7 +52,9 @@ const ProductCard = ({ prod ,setmodalinfo}) => {
       <div className="right_side p-5 lg:w-[-60%] md:w-[60%]">
         <h2 className="text-4xl mb-3 text-lime-800 font-bold"> {product_name} </h2>
         <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center"> <span className="text-2xl font-semi-bold mr-2">Post by - {sellerName}</span> <span className="text-xl text-blue-500"><GoVerified/></span> </div>
+        <div className="flex items-center"> <span className="text-2xl font-semi-bold mr-2">Post by - {sellerName}</span>
+           { user?.verified === true && <span className="text-xl text-blue-500"><GoVerified/></span>}
+          </div>
         <small className="text-orange-300">{time} </small>
         </div>
         <p className="description"> {productDetails.slice(0,300)} </p>
