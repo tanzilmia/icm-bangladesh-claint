@@ -10,9 +10,6 @@ const AddProduct = () => {
     const {user} =  useContext(myContext)
     const naviget = useNavigate()
     const time = moment().format('lll');
-   
-   
-
     const imgkey = process.env.REACT_APP_IMAGE_SEC
     console.log(imgkey);
     const handleAddproducts = data => {
@@ -40,14 +37,16 @@ const AddProduct = () => {
                     productDetails: data.productDetails, 
                     location :data.location,
                     time:time,
-                    userEmail : user.email
+                    userEmail : user?.email,
+                    sellerName: user?.displayName
                 }
 
                 // save product information to the db
-                fetch('http://localhost:5000/allproducts', {
+                fetch(`http://localhost:5000/allproducts?email=${user?.email}`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json', 
+                        authorization: `bearer ${localStorage.getItem('icmToken')}`
                     },
                     body: JSON.stringify(myproducts)
                 })

@@ -5,7 +5,8 @@ import { myContext } from "../contextApi/Authcontext";
 const BookModal = ({ modalinfo,setmodalinfo }) => {
 
   const { user } = useContext(myContext);
-  const { product_name, product_price, brand_name } = modalinfo;
+  // get product data
+  const { product_name, product_price, brand_name,userEmail:sellerEmail,_id:productId } = modalinfo;
   const handleBooking = (event) =>{
     event.preventDefault();
     setmodalinfo(null)
@@ -16,7 +17,7 @@ const BookModal = ({ modalinfo,setmodalinfo }) => {
     const product_name = form.product_name.value;
     const product_price = form.product_price.value;
     const location = form.location.value;
-
+// store booked data on object
     const bookingdata = {
         product_name,
         product_price,
@@ -24,10 +25,40 @@ const BookModal = ({ modalinfo,setmodalinfo }) => {
         name,
         email,
         phone,
-        brand_name
+        brand_name,
+        sellerEmail
     }
+
+    fetch(`http://localhost:5000/bookingproduct?email=${user?.email}`,{
+      method : 'POST',
+      headers : {
+        'content-type' : 'application/json',
+        authorization: `bearer ${localStorage.getItem('icmToken')}`
+      },
+      body : JSON.stringify(bookingdata)
+    })
+    .then(res => res.json())
+    .then(data =>{
+      // bookingproduct()
+    })
+
     toast.success(`${product_name} is booked`)
   }
+
+
+  // const bookingproduct =()=>{
+  //   fetch(`http://localhost:5000/allproducts?productId=${productId}&email=${user?.email}`,{
+  //     method : 'PUT',
+  //     headers : {
+  //       authorization: `bearer ${localStorage.getItem('icmToken')}`
+  //     }
+      
+  //   })
+  //   .then(res => res.json())
+  //   .then(data =>{
+  //      console.log(data); 
+  //   })
+  // }
 
   return (
 

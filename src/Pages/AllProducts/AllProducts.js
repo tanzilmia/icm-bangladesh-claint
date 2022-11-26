@@ -5,7 +5,7 @@ import BookModal from '../../component/BookModal';
 import { myContext } from '../../contextApi/Authcontext';
 import ProductCard from './ProductCard'
 const AllProducts = () => {
-    const {user} = useContext(myContext)
+    const {user,logOut} = useContext(myContext)
     const [modalinfo, setmodalinfo] = useState(null)
     const data = useLoaderData()
     const  {category_name} = data
@@ -28,9 +28,11 @@ const AllProducts = () => {
 
     return (
         <div>
-            <p>this is all product page {category_name}</p>
+            <h2 className='text-center text-3xl text-orange-300'> {category_name} Brand products</h2>
             {
-                product.map(prod => <ProductCard setmodalinfo={setmodalinfo} key = {prod._id} prod = {prod}></ProductCard>)
+              product.length ?  product.map(prod => <ProductCard setmodalinfo={setmodalinfo} key = {prod._id} prod = {prod}></ProductCard>)
+              :
+              <h2 className='text-center text-3xl text-orange-300'>SomeThing Went to wrong please <button onClick={logOut} className='btn'>logout</button> </h2>
             }
             { modalinfo&& <BookModal setmodalinfo={setmodalinfo} modalinfo={modalinfo}></BookModal>}
             

@@ -8,14 +8,18 @@ import AllByer from "../Pages/DashBoardPage/AllByer/AllByer";
 import Allseller from "../Pages/DashBoardPage/AllSeller/Allseller";
 import Myorders from "../Pages/DashBoardPage/My orders/Myorders";
 import MyProducts from "../Pages/DashBoardPage/My Products/MyProducts";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Homepage from "../Pages/Home/HomePage/Homepage";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
+import AdminRoute from "./AdminRoute";
 import PrivetRouting from "./PrivetRouting";
+import SellerRouting from "./SellerRouting";
 
 const router = createBrowserRouter([
     {
         path : '/', element : <Main></Main>,
+        errorElement : <ErrorPage></ErrorPage>,
         children : [
             {
                 path : '/',
@@ -44,6 +48,7 @@ const router = createBrowserRouter([
     },
     {
         path : '/dashbord', 
+        errorElement : <ErrorPage></ErrorPage>,
         element : <PrivetRouting> <DashboardLayout></DashboardLayout> </PrivetRouting> ,
         children : [
             {
@@ -52,20 +57,20 @@ const router = createBrowserRouter([
             },
             {
                 path : '/dashbord/myproducts',
-                element : <MyProducts></MyProducts>
+                element : <SellerRouting><MyProducts></MyProducts></SellerRouting>
             },
             {
                 path : '/dashbord/addproducts',
-                element : <AddProduct></AddProduct>
+                element : <SellerRouting><AddProduct></AddProduct></SellerRouting>
             },
 
             {
                 path : '/dashbord/allseller',
-                element : <Allseller></Allseller>
+                element : <AdminRoute> <Allseller></Allseller> </AdminRoute>
             },
             {
                 path : '/dashbord/allbyer',
-                element : <AllByer></AllByer>
+                element : <AdminRoute> <AllByer></AllByer> </AdminRoute>
             },
            
         ]

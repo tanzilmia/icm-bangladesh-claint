@@ -19,6 +19,10 @@ const MyProducts = () => {
     },
   });
 
+  if(isLoading){
+    return <p>Loadding...</p>
+  }
+
   return (
     <div>
       <div className="overflow-x-auto">
