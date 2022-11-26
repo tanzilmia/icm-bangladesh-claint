@@ -1,22 +1,60 @@
-
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
-import  {myContext} from '../../../contextApi/Authcontext'
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
+import { myContext } from "../../../contextApi/Authcontext";
 const Myorders = () => {
-    const {user} = useContext(myContext)
-    const {data : bookedproduct =[]} = useQuery({
-        queryKey : ['bookingproduct',user?.email],
-        queryFn : async ()=>{
-            const res = await fetch(`http://localhost:5000/bookingproduct?email=${user?.email}`)
-            const data = await res.json()
-            return data
+  const { user } = useContext(myContext);
+  const { data: bookedproduct = [], isLoading } = useQuery({
+    queryKey: ["bookingproduct", user?.email],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/bookingproduct?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("icmToken")}`,
+          },
         }
-    })
-    return (
-        <div>
-            <h2>My Orders {bookedproduct.length} </h2>
-        </div>
-    );
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <p>loadding ....</p>;
+  }
+  return (
+    <div>
+      <h2 className="text-center my-4 text-2xl">
+        My Orders {bookedproduct.length}{" "}
+      </h2>
+      <div className="overflow-x-auto">
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th>serial</th>
+              <th>product name</th>
+              <th> brand_name </th>
+              <th> Product Price </th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+            { bookedproduct.length && bookedproduct.map((booked, index) => (
+              <tr key = {booked._id}>
+                <th>{index + 1}</th>
+                <th> {booked.product_name} </th>
+                <th> {booked.brand_name} </th>
+                <th> {booked.product_price} </th>
+                <th>
+                  <button className="btn btn-sm">bay Now</button>
+                </th>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default Myorders;

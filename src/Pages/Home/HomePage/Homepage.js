@@ -1,4 +1,5 @@
 import React from 'react';
+import Campain from '../Campain/Campain';
 import Categorie from '../Categori/Categorie';
 
 const Homepage = () => {
@@ -6,6 +7,7 @@ const Homepage = () => {
         <div>
             <p>this is home page </p>
             <Categorie></Categorie>
+            <Campain></Campain>
         </div>
     );
 };
