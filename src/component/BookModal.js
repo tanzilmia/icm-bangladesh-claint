@@ -75,7 +75,7 @@ const BookModal = ({ modalinfo,setmodalinfo }) => {
           <input
             name="product_price"
             defaultValue={product_price}
-            type="text"
+            type=""
             disabled
             className="input w-full input-bordered"
           />

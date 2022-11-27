@@ -64,17 +64,18 @@ const MyProducts = () => {
                     <th> {product.product_price} </th>
                     <th>
                       {" "}
-                      <button className="btn btn-sm btn-success">
-                        available
+                      <button  className={`btn btn-sm ${product.sold === true ?'btn-warning' : 'btn-success'}`}>
+                       {product.sold === true ? "Not Available" : "Availble"}
                       </button>{" "}
                     </th>
                     <th>
                       {" "}
                       <button
+                      disabled = {product.sold === true}
                         onClick={() => handlecampain(product._id)}
-                        className={`btn btn-sm  ${product.campain === true ? 'btn-success':' btn-outline btn-success'}`}
+                        className={`btn btn-sm  ${product.campain === true ? 'btn-success':'btn-primary'}`}
                       >
-                       {product.campain === true ? 'add running' : 'start campain'}
+                       {product.campain === true ? 'add is running' : 'start campain'}
                       </button>{" "}
                     </th>
                     <th>

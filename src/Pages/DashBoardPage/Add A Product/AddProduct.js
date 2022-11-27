@@ -38,7 +38,8 @@ const AddProduct = () => {
                     location :data.location,
                     time:time,
                     userEmail : user?.email,
-                    sellerName: user?.displayName
+                    sellerName: user?.displayName,
+                    sold : false
                 }
 
                 // save product information to the db
