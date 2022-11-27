@@ -11,6 +11,7 @@ import MyProducts from "../Pages/DashBoardPage/My Products/MyProducts";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Homepage from "../Pages/Home/HomePage/Homepage";
 import Login from "../Pages/Login/Login";
+import ParchesProduct from "../Pages/productParches/ParchesProduct";
 import Signup from "../Pages/Signup/Signup";
 import AdminRoute from "./AdminRoute";
 import PrivetRouting from "./PrivetRouting";
@@ -54,6 +55,12 @@ const router = createBrowserRouter([
             {
                 path : '/dashbord',
                 element : <Myorders></Myorders>
+            },
+            {
+                path : '/dashbord/parches/:id',
+                element : <ParchesProduct></ParchesProduct>,
+                loader : ({params})=> fetch(`http://localhost:5000/product/parces/${params.id}`)
+                
             },
             {
                 path : '/dashbord/myproducts',

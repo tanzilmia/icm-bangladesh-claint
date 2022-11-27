@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { myContext } from "../../../contextApi/Authcontext";
 const Myorders = () => {
   const { user } = useContext(myContext);
@@ -46,7 +47,8 @@ const Myorders = () => {
                 <th> {booked.brand_name} </th>
                 <th> {booked.product_price} </th>
                 <th>
-                  <button className="btn btn-sm">bay Now</button>
+                  <Link to = {`/dashbord/parches/${booked._id}`} className="btn btn-sm">Bay Now</Link>
+                  
                 </th>
               </tr>
             ))}

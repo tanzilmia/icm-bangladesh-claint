@@ -2,6 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { myContext } from '../../../contextApi/Authcontext';
+import CampainCard from './CampainCard';
 
 const Campain = () => {
 const {user} = useContext(myContext)
@@ -14,14 +15,29 @@ queryFn : async ()=>{
     return data
 }
 })
+console.log(campain)
 
 if(isLoading){
     return <p>loadding....</p>
 }
     return (
-        <div>
-            <p> ======= {campain.length} </p>
+       <>
+       
+       {
+        campain.length &&
+        
+        <>
+         <div>
+         <h1 className='text-center text-purple-600 font-bold text-4xl my-10'>Recenly campained Products</h1>
+        <div className='grid md:grid-cols-4 lg:gird-cols-4 w-11/12 md:w-[1240px] lg:w-[1240px] mx-auto gap-6'>
+        {
+             campain.map((campcard)=> <CampainCard key={campcard._id} campcard ={campcard}></CampainCard>)
+         }
         </div>
+     </div>
+        </>
+       }
+       </>
     );
 };
 
