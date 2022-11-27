@@ -17,12 +17,18 @@ if(isLoading){
 }
 
     return (
-        <div className='md:max-w-[940px] md:mx-auto grid gap-4 md:grid-cols-3 lg:grid-cols-3'>
-            {
-                catetories.map(categories=> <Card categories={categories}></Card>)
-            }
-        </div>
+        <>
+            <h1 className='text-center text-2xl my-10 lg:text-5xl  md:text-5xl text-[#45cdf6]'> Sellect Your Favorite Brand Products </h1>
+         <div className='md:max-w-[940px] md:mx-auto grid gap-4 md:grid-cols-3 lg:grid-cols-3'>
+           
+           {
+              catetories &&  catetories.map(categories=> <Card categories={categories}></Card>)
+           }
+       </div>
+        </>
+       
     );
 };
 
 export default Categorie;
+

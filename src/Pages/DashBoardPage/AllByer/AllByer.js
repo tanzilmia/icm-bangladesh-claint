@@ -33,7 +33,7 @@ const AllByer = () => {
           </tr>
         </thead>
         <tbody>
-          {bayers.map((bayer, index) => (
+          { bayers && bayers.map((bayer, index) => (
             <tr key={bayer._id}>
               <th>{index + 1}</th>
               <th> {bayer.name} </th>

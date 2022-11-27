@@ -40,7 +40,7 @@ const Myorders = () => {
             </tr>
           </thead>
           <tbody>
-            { bookedproduct.length && bookedproduct.map((booked, index) => (
+            { bookedproduct && bookedproduct.map((booked, index) => (
               <tr key = {booked._id}>
                 <th>{index + 1}</th>
                 <th> {booked.product_name} </th>

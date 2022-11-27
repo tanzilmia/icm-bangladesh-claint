@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { myContext } from "../../../contextApi/Authcontext";
+import logo from '../../../assest/icon.png'
 
 const Navbar = () => {
   const { user ,logOut} = useContext(myContext);
@@ -25,7 +26,7 @@ const Navbar = () => {
       </>
       :
       <li>
-      <Link to="/login">login</Link>
+      <Link className="btn btn-primary text-lime-50 rounded-[10px] mx-0 md:mx-2" to="/login">login</Link>
     </li>
       
     }
@@ -37,7 +38,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 flex justify-between">
+    <div className="navbar bg-[#e2f7ff] py-4 rounded-md flex justify-between">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -53,9 +54,12 @@ const Navbar = () => {
             {menulist}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
+       <div className="flex items-center">
+        <img src= {logo} className ="w-[40px] " alt="" />
+       <Link to="/" className="btn btn-ghost bg-slate-100  normal-case text-xl md:text-2xl">
           ICM Bangladesh
         </Link>
+       </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menulist}</ul>

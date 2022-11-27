@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { myContext } from "../contextApi/Authcontext";
 import useAdminHook from "../CustomeHOOk/MakeAdmin/useAdminHook";
 import useSellerHook from "../CustomeHOOk/MakeSellerHook/useSellerHook";
+import Footer from "../Pages/Footer/Footer";
 import Navbar from "../Pages/Home/navbar/Navbar";
 
 const DashboardLayout = () => {
@@ -18,9 +19,9 @@ const DashboardLayout = () => {
         <div className="drawer-content">
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side bg-[#d2fbffeb]">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+          <ul className="menu p-4 w-80 text-base-content">
             <li>
               <Link to="/dashbord">My orders </Link>
             </li>
@@ -53,6 +54,7 @@ const DashboardLayout = () => {
           </ul>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
