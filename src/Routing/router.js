@@ -8,6 +8,7 @@ import AllByer from "../Pages/DashBoardPage/AllByer/AllByer";
 import Allseller from "../Pages/DashBoardPage/AllSeller/Allseller";
 import Myorders from "../Pages/DashBoardPage/My orders/Myorders";
 import MyProducts from "../Pages/DashBoardPage/My Products/MyProducts";
+import Reports from "../Pages/DashBoardPage/Reports/Reports";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Homepage from "../Pages/Home/HomePage/Homepage";
 import Login from "../Pages/Login/Login";
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
             {
                 path : '/dashbord/allbyer',
                 element : <AdminRoute> <AllByer></AllByer> </AdminRoute>
+            },
+            {
+                path : '/dashbord/report',
+                element : <AdminRoute> <Reports></Reports> </AdminRoute>
             },
            
         ]

@@ -46,6 +46,9 @@ const DashboardLayout = () => {
                 <li>
                   <Link to="/dashbord/allbyer">all byer</Link>
                 </li>
+                <li>
+                  <Link to="/dashbord/report"> Report </Link>
+                </li>
               </>
             )}
           </ul>

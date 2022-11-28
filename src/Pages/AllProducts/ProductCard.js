@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import './productCard.css'
 import { FiPhoneCall } from 'react-icons/fi';
 import { ImLocation2 } from 'react-icons/im';
 import { GoVerified } from 'react-icons/go';
 import { useQuery } from "@tanstack/react-query";
+import { MdOutlineWarning } from 'react-icons/md';
+import { myContext } from "../../contextApi/Authcontext";
+import toast from "react-hot-toast";
 const ProductCard = ({ prod ,setmodalinfo}) => {
+  const {user:bayer} = useContext(myContext)
   const {
     product_name,
     image,
@@ -17,7 +21,8 @@ const ProductCard = ({ prod ,setmodalinfo}) => {
     productDetails,
     location,
     time,
-    sellerName
+    sellerName,
+    _id
   } = prod;
 
   const {data : user, isLoading} = useQuery({
@@ -29,11 +34,27 @@ const ProductCard = ({ prod ,setmodalinfo}) => {
     }
   })
 
+const reportAdmin = (id) =>{
+  fetch(`http://localhost:5000/report?id=${id}&email=${bayer?.email}`,{
+    method : 'PUT',
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("icmToken")}`,
+    },
+  })
+  .then(res => res.json())
+      .then(data => {
+        if(data.modifiedCount>0){
+          toast.success('report send successFull')
+        }
+      })
+}
+
   if(isLoading){
     return <p>loadding...</p>
   }
 
-  console.log(user)
+  
 
 
 
@@ -65,7 +86,9 @@ const ProductCard = ({ prod ,setmodalinfo}) => {
           <span className="flex mx-1 p-1 bg-[#edeeed] my-1 rounded-md items-center">  condition {condition_type}, </span>
           <span className="flex mx-1 p-1 bg-[#edeeed] my-1 rounded-md items-center"> <ImLocation2/> {location} </span>
         </div>
-        <div> { <label onClick={()=>setmodalinfo(prod)} htmlFor="openmodal" className="btn btn-success">Book Now</label>} </div>
+        <div> { <label onClick={()=>setmodalinfo(prod)} htmlFor="openmodal" className="btn btn-success">Book Now</label>}
+          <button onClick={()=>reportAdmin(_id)} className="btn btn-warning mx-2"> report to admin <MdOutlineWarning/> </button>
+         </div>
       </div>
     </div>
   );
