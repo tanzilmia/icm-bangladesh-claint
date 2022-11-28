@@ -40,14 +40,25 @@ const Myorders = () => {
             </tr>
           </thead>
           <tbody>
-            { bookedproduct && bookedproduct.map((booked, index) => (
+            { bookedproduct.length > 0 && bookedproduct.map((booked, index) => (
               <tr key = {booked._id}>
                 <th>{index + 1}</th>
                 <th> {booked.product_name} </th>
                 <th> {booked.brand_name} </th>
                 <th> {booked.product_price} </th>
                 <th>
-                  <Link to = {`/dashbord/parches/${booked._id}`} className="btn btn-sm">Bay Now</Link>
+                  {
+                    booked.sold === true ?
+                     <button className="btn btn-success">
+                       Payed
+                     </button>
+                    :
+                    <>
+                    <Link to = {`/dashbord/parches/${booked._id}`} className="btn btn-sm"> Bay Now </Link>
+                    </>
+
+                    
+                    }
                   
                 </th>
               </tr>

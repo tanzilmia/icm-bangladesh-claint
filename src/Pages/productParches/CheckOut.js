@@ -77,6 +77,9 @@ const CheckOut = ({ bookedprodut }) => {
         settrangaction(paymentIntent.id)
         // update product status post feth
         paymentAdd()
+
+        // update bookedcolledction
+        paymentAddinfoinbookedCollection()
     }
     setloadding(false)
   };
@@ -84,6 +87,20 @@ const CheckOut = ({ bookedprodut }) => {
 
   const paymentAdd = () =>{
     fetch(`http://localhost:5000/addpayment?sellerEmail=${sellerEmail}&product_name=${product_name}&email=${user?.email}`,{
+        method : 'PUT',
+        headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("icmToken")}`,
+          },
+    })
+    .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        
+      })
+  }
+  const paymentAddinfoinbookedCollection = () =>{
+    fetch(`http://localhost:5000/addpaymentinbooked?sellerEmail=${sellerEmail}&product_name=${product_name}&email=${user?.email}`,{
         method : 'PUT',
         headers: {
             "content-type": "application/json",
