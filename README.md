@@ -29,3 +29,7 @@ products of three brands are available here, and many products are available und
 * daisyui & tailwind for styling 
 * stripe.js for payment method
 
+### Admin access
+* Email : admin@gmail.com
+* Password : goT$%t14
+

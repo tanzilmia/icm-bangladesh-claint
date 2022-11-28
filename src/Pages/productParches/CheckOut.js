@@ -1,9 +1,12 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { myContext } from "../../contextApi/Authcontext";
 
 const CheckOut = ({ bookedprodut }) => {
-  const {user} = useContext(myContext)
+  const {user} = useContext(myContext);
+  const naviget = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const [carderror, setcarderror] = useState("");
@@ -95,7 +98,8 @@ const CheckOut = ({ bookedprodut }) => {
     })
     .then(res => res.json())
       .then(data => {
-        console.log(data)
+        naviget('/')
+        toast.success('payment successfull')
         
       })
   }
@@ -109,7 +113,7 @@ const CheckOut = ({ bookedprodut }) => {
     })
     .then(res => res.json())
       .then(data => {
-        console.log(data)
+        
         
       })
   }

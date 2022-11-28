@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate, useRouteError } from "react-router-dom";
 import { myContext } from "../../contextApi/Authcontext";
-
+import errorimg from '../../assest/errorimg.png'
 const ErrorPage = () => {
   const { logOut } = useContext(myContext);
   const error = useRouteError();
@@ -20,7 +20,7 @@ const ErrorPage = () => {
   <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
     <div className="max-w-md text-center">
       <h2 className="mb-8 font-extrabold text-9xl dark:text-gray-600">
-        <span className="sr-only">Error</span>404
+        <img  src= {errorimg} alt="" />
       </h2>
       <p className="text-2xl font-semibold md:text-3xl">
         Sorry, we couldn't find this page.
