@@ -2,29 +2,32 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { myContext } from '../../contextApi/Authcontext';
-import useTokenHook from '../../CustomeHOOk/useTokenHook/useTokenHook';
-
 const Login = () => {
     const { register, handleSubmit,formState: { errors },} = useForm();
     const [loginError, setLoginError] = useState(''); 
     const {logIn,googleSignin} = useContext(myContext) 
-    const [useremail, setuseremail] = useState('');
-    const [token] = useTokenHook(useremail)
     const negivet = useNavigate()
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
-    if(token){
-        negivet(from, { replace: true });
-    }
-    
+ 
     const handlLogin = data => {
         console.log(data);
         setLoginError('');
         logIn(data.email, data.password)
             .then(result => {
                 
-                setuseremail(data.email)
+                // fetch jwt
+                fetch(`https://icm-server.vercel.app/jwt?email=${data.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.jwtToken) {
+                        localStorage.setItem('icmToken', data.jwtToken);
+                        negivet(from, { replace: true });
+                    }
+                });
+
+
             })
             .catch(error => {
                 setLoginError(error.message);
@@ -39,12 +42,21 @@ const Login = () => {
           const email = user.email;
           const role = "bayer";
             storeGoogleUserInfo(name,email,role)
-            setuseremail(email)
+            fetch(`https://icm-server.vercel.app/jwt?email=${email}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.jwtToken) {
+                        localStorage.setItem('icmToken', data.jwtToken);
+                        negivet(from, { replace: true });
+                    }
+                });
         })
         .catch(error =>{
             setLoginError(error.message)
         })
     }
+
+
 
 
     const storeGoogleUserInfo = (name, email,role) =>{
@@ -59,9 +71,11 @@ const Login = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            negivet(from, { replace: true });
+            // negivet(from, { replace: true });
         })
     }
+
+   
 
     return (
         <div className='h-[800px] flex justify-center items-center'>

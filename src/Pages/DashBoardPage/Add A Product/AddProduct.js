@@ -24,7 +24,6 @@ const AddProduct = () => {
         .then(res => res.json())
         .then(upload => {
             if(upload.success){
-            //    stored data on object for send db
                 const myproducts = {
                     product_name : data.productName, 
                     image : upload.data.url,

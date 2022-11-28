@@ -21,7 +21,7 @@ const MyProducts = () => {
   });
 
   if (isLoading) {
-    return <p>Loadding...</p>;
+    return <progress className="progress w-56"></progress>
   }
 
   const handlecampain = (id) => {

@@ -1,25 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { myContext } from '../../contextApi/Authcontext';
-import useTokenHook from '../../CustomeHOOk/useTokenHook/useTokenHook';
-
 const Signup = () => {
     const { register, handleSubmit,formState: { errors },} = useForm();
     const [signUpError, setSignUPError] = useState('')
     const {signuP,updateUser} = useContext(myContext)
-    const [useremail, setuseremail] = useState('')
-    const [token] = useTokenHook(useremail)
     const naviget = useNavigate()
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
-
-
-     if(token){
-        naviget(from, { replace: true });
-     }
-
     const handleSignup = (data) => {
         setSignUPError('');
         signuP(data.email, data.password)
@@ -58,7 +46,14 @@ const Signup = () => {
         })
         .then(res => res.json())
         .then(data => {
-            setuseremail(email)
+            fetch(`https://icm-server.vercel.app/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.jwtToken) {
+                    localStorage.setItem('icmToken', data.jwtToken);
+                    naviget('/')
+                }
+            });
             
         })
     }

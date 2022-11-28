@@ -13,7 +13,7 @@ const Categorie = () => {
     })
 
 if(isLoading){
-    return <p>loadding...</p>
+    return <progress className="progress w-56"></progress>
 }
 
     return (
