@@ -33,3 +33,4 @@ products of three brands are available here, and many products are available und
 * সাইন আপ করার পর আপনি যদি প্রোডাক্ট গুলো দেখতে চান তাহলে , আপনাকে আবার LogOut হয়ে নতুন করে Login হতে হবে , তা না হলে আপনার ব্রাউজার Hang করতে পারে,
 * গুগল দিয়ে লগিইন করা গেলেও সে কোন প্রোডাক্ট দেখতে পারছে না ।
 * উপরের দুটি বাগ কেন সেটা আমার অজানা ।
+* Dashboard দেখার জন্য আপনাকে Left side এর Bars ওপেন করে dashboard টা ওপেন করে নিতে হবে। 
