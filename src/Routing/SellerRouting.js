@@ -12,7 +12,7 @@ const SellerRouting = ({children}) => {
     const [seller, setsellerloadding] = useSellerHook(user?.email)
 
     if(loading || adminLoading || setsellerloadding){
-        return <progress className="progress w-56"></progress>
+        return <progress className="progress mx-auto w-56"></progress>
     }
 
     if ( admin  || seller ){

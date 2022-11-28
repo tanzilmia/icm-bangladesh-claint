@@ -10,7 +10,7 @@ const AdminRoute = ({children}) => {
     const [admin, adminLoading] = useAdminHook(user?.email)
 
     if(loading || adminLoading){
-        return <progress className="progress w-56"></progress>
+        return <progress className="progress mx-auto w-56"></progress>
     }
 
     if (user && admin){

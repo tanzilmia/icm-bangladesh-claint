@@ -21,7 +21,7 @@ const MyProducts = () => {
   });
 
   if (isLoading) {
-    return <progress className="progress w-56"></progress>
+    return <progress className="progress mx-auto w-56"></progress>
   }
 
   const handlecampain = (id) => {
