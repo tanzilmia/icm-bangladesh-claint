@@ -7,7 +7,7 @@ const Reports = () => {
   const { data: reposts } = useQuery({
     queryKey: ["report"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/report?email=${adminemail?.email}`,{
+      const res = await fetch(`https://icm-server.vercel.app/report?email=${adminemail?.email}`,{
         headers: {
             authorization: `bearer ${localStorage.getItem('icmToken')}`
         },

@@ -8,7 +8,7 @@ const AllByer = () => {
   const { data: bayers = [], isLoading,refetch } = useQuery({
     queryKey: ["bayer",user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/bayer?email=${user?.email}`,{
+      const res = await fetch(`https://icm-server.vercel.app/bayer?email=${user?.email}`,{
         headers: {
           authorization: `bearer ${localStorage.getItem('icmToken')}`
       }
@@ -19,7 +19,7 @@ const AllByer = () => {
   });
 
   const deletebayer = (id) =>{
-    fetch(`http://localhost:5000/deleteuser?id=${id}`,{
+    fetch(`https://icm-server.vercel.app/deleteuser?id=${id}`,{
       method : 'DELETE',
     })
     .then(res => res.json())

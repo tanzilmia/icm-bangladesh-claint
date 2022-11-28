@@ -42,7 +42,7 @@ const router = createBrowserRouter([
             {
                 path : '/categori/:id',
                 element : <PrivetRouting><AllProducts></AllProducts></PrivetRouting>,
-                loader : ({params})=> fetch(`http://localhost:5000/categories/${params.id}`)
+                loader : ({params})=> fetch(`https://icm-server.vercel.app/categories/${params.id}`)
 
             },
             
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
             {
                 path : '/dashbord/parches/:id',
                 element : <ParchesProduct></ParchesProduct>,
-                loader : ({params})=> fetch(`http://localhost:5000/product/parces/${params.id}`)
+                loader : ({params})=> fetch(`https://icm-server.vercel.app/product/parces/${params.id}`)
                 
             },
             {

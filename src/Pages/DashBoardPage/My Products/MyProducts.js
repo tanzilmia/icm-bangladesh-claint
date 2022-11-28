@@ -8,7 +8,7 @@ const MyProducts = () => {
     queryKey: ["myproduct", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/myproduct?email=${user?.email}`,
+        `https://icm-server.vercel.app/myproduct?email=${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("icmToken")}`,
@@ -25,7 +25,7 @@ const MyProducts = () => {
   }
 
   const handlecampain = (id) => {
-    fetch(`http://localhost:5000/campain?productId=${id}&email=${user?.email}`, {
+    fetch(`https://icm-server.vercel.app/campain?productId=${id}&email=${user?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
