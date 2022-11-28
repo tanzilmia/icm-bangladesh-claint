@@ -65,7 +65,7 @@ const ProductCard = ({ prod ,setmodalinfo}) => {
           <span className="flex mx-1 p-1 bg-[#edeeed] my-1 rounded-md items-center">  condition {condition_type}, </span>
           <span className="flex mx-1 p-1 bg-[#edeeed] my-1 rounded-md items-center"> <ImLocation2/> {location} </span>
         </div>
-        <div> <label onClick={()=>setmodalinfo(prod)} htmlFor="openmodal" className="btn btn-success">Book Now</label> </div>
+        <div> {!user?.role === "seller" && <label onClick={()=>setmodalinfo(prod)} htmlFor="openmodal" className="btn btn-success">Book Now</label>} </div>
       </div>
     </div>
   );

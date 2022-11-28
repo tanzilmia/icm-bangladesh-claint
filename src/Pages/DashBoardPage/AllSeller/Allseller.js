@@ -34,6 +34,15 @@ const Allseller = () => {
       })
     }
 
+
+    const deleteseller = (id) =>{
+      fetch(`http://localhost:5000/deleteuser?id=${id}`,{
+        method : 'DELETE',
+      })
+      .then(res => res.json())
+      .then(data => {refetch()})
+    }
+
     if(isLoading){
       return <p>Loadding ...</p>
     }
@@ -59,7 +68,7 @@ const Allseller = () => {
                 <th><button onClick={()=>handleVerify(seller._id)} className= {`btn btn-sm btn-primary ${seller.verified === true ? 'btn-primary' : 'btn-warning'}`} >
                   {seller.verified === true ? 'verifyed' : 'verify Now' }
                   </button></th>
-                <th><button className='btn btn-sm btn-warning'>Delete</button></th>
+                <th><button onClick={()=>deleteseller(seller._id)} className='btn btn-sm btn-warning'>Delete</button></th>
               </tr>
             ))}
           </tbody>

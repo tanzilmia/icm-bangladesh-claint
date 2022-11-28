@@ -5,7 +5,7 @@ import {myContext} from '../../../contextApi/Authcontext'
 
 const AllByer = () => {
   const {user} = useContext(myContext)
-  const { data: bayers = [], isLoading } = useQuery({
+  const { data: bayers = [], isLoading,refetch } = useQuery({
     queryKey: ["bayer",user?.email],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/bayer?email=${user?.email}`,{
@@ -17,6 +17,14 @@ const AllByer = () => {
       return data;
     },
   });
+
+  const deletebayer = (id) =>{
+    fetch(`http://localhost:5000/deleteuser?id=${id}`,{
+      method : 'DELETE',
+    })
+    .then(res => res.json())
+    .then(data => {refetch()})
+  }
 
   if(isLoading){
     return <p>Loadding..</p>
@@ -38,7 +46,7 @@ const AllByer = () => {
               <th>{index + 1}</th>
               <th> {bayer.name} </th>
               <th>{bayer.email}</th>
-              <th><button className="btn btn-sm btn-warning">Delete</button></th>
+              <th><button onClick={()=>deletebayer(bayer._id)} className="btn btn-sm btn-warning">Delete</button></th>
             </tr>
           ))}
         </tbody>
